@@ -1,0 +1,6 @@
+#ingore webpack bundle 
+bundle.js
+
+
+#ignore folder of node modules
+node_modules
