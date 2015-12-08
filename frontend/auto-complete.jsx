@@ -2,31 +2,34 @@ var React = require('react');
 
 var AutoComplete = React.createClass({
   getInitialState: function() {
-    return {string: ""};
+    return {searchString: ""};
   },
 
   change: function(e){
-    this.setState({string: e.target.value});
+    this.setState({searchString: e.target.value});
   },
 
-  insertVal: function(e) {
-    this.setState({string: e.target.innerHTML});
+  handleNameClick: function(e) {
+    this.setState({searchString: e.target.innerHTML});
   },
 
   render: function() {
     var names = this.props.names,
-        string = this.state.string.trim().toLowerCase();
+        searchString = this.state.searchString.trim().toLowerCase();
 
-    if(string.length > 0){
+    if(searchString.length > 0){
       names = names.filter(function(name){
-        return name.toLowerCase().match( string );
+        return name.toLowerCase().match( searchString );
       });
     }
 
     return (
       <div>
-        <input type="text" value={this.state.string} onChange={this.change} placeholder="Type Here"/>
-        <ul onClick={this.insertVal}>
+        <input type="text"
+               value={this.state.searchString}
+               onChange={this.change}
+               placeholder="Type Here"/>
+             <ul onClick={this.handleNameClick}>
           {
             names.map(function(name, idx) {
               return <li key={idx}>{name}</li>;
